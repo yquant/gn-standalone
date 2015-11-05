@@ -1,0 +1,9 @@
+tasks = [
+  {
+    # Pull clang if needed or requested via GYP_DEFINES.
+    # Note: On Win, this should run after win_toolchain, as it may use it.
+    'name': 'clang',
+    'pattern': '.',
+    'action': ['python', '../src/tools/clang/scripts/update.py', '--if-needed'],
+  }
+]

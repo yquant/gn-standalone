@@ -3,6 +3,9 @@
 # found in the LICENSE file.
 
 declare_args() {
+  # Selects the desired build mode. Standalone builds or chromium build
+  is_standalone_build = false
+
   # Selects the desired build flavor. Official builds get additional
   # processing to prepare for release. Normally you will want to develop and
   # test with this flag off.

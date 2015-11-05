@@ -26,6 +26,8 @@ BINUTILS_OUT = 'Release'
 DETECT_HOST_ARCH = os.path.abspath(os.path.join(
     BINUTILS_DIR, '../../build/detect_host_arch.py'))
 
+DOWNLOAD_FROM_GOOGLE_STORAGE = os.path.abspath(os.path.join(
+    BINUTILS_DIR, '../../../tools/download_from_google_storage'))
 
 def ReadFile(filename):
   with file(filename, 'r') as f:
@@ -75,7 +77,7 @@ def FetchAndExtract(arch):
 
   print "Downloading", tarball
   subprocess.check_call([
-      'download_from_google_storage',
+      DOWNLOAD_FROM_GOOGLE_STORAGE,
       '--no_resume',
       '--no_auth',
       '--bucket', 'chromium-binutils',

@@ -1,0 +1,4 @@
+is_standalone_build = true
+is_clang = false
+is_debug = false
+symbol_level = 0

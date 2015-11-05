@@ -1,0 +1,36 @@
+# Copyright (c) 2013 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+static_library("example_lib") {
+  sources = [
+    "example_lib.cc",
+  ]
+
+  include_dirs = ["//projects/example_app/src/include"]
+}
+
+shared_library("example_shlib") {
+  sources = [
+    "example_shlib.cc",
+  ]
+
+  defines = [
+    "EXAMPLE_SHLIB_IMPLEMENTATION",
+  ]
+  
+  include_dirs = ["//projects/example_app/src/include"]
+}
+
+executable("example_app") {
+  sources = [
+    "main.cc",
+  ]
+
+  include_dirs = ["//projects/example_app/src/include"]
+  
+  deps = [
+    ":example_lib",
+    ":example_shlib"
+  ]
+}

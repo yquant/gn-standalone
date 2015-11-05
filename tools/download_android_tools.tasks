@@ -1,0 +1,14 @@
+tasks = [
+  {
+    # Pull android sdk and ndk.
+    'name': 'android_tools',
+    'pattern': '.',
+    'action': [
+      'git',
+      'clone',
+      'https://chromium.googlesource.com/android_tools.git',
+      '../src/third_party/android_tools',
+      '--depth=1'
+    ],
+  }
+]

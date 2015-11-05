@@ -1,0 +1,5 @@
+is_standalone_build = true
+target_os = "android"
+target_cpu = "arm"
+is_clang = false
+is_debug = false

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export DEPOT_TOOLS_WIN_TOOLCHAIN=0
+
+DIR=`dirname "$0"`
+${DIR}/../src/buildtools/linux64/gn $*

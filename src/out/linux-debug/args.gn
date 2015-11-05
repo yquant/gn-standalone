@@ -1,0 +1,2 @@
+is_standalone_build = true
+is_clang = false
