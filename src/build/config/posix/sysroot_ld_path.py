@@ -8,13 +8,44 @@
 # TODO(brettw) the build/linux/sysroot_ld_path.sh script should be rewritten in
 # Python in this file.
 
-import subprocess
 import sys
+import os
 
-if len(sys.argv) != 3:
-  print "Need two arguments"
-  sys.exit(1)
+def process_ld_so_conf(ld_so_conf):
+  result = ''
+  f = open(ld_so_conf)
+  for line in fh.readlines():
+    if line.startswith('include'):
+      include_file = line[7:].strip()
+      if not include_file.startswith('/'):
+        include_file = os.path.join(os.path.dirname(ld_so_conf), include_file)
+      result += process_ld_so_conf(include_file)
+    elif line.startswith('/'):
+      result += "-L%s -Wl,-rpath-link=%s " % (entry, entry)
+  f.close()
 
-result = subprocess.check_output([sys.argv[1], sys.argv[2]]).strip()
 
-print '"' + result + '"'
+def main():
+  if len(sys.argv) != 2:
+    print "Need one argument"
+    sys.exit(1)
+
+  sysroot = sys.argv[1]
+  ld_so_conf = os.path.join(sysroot, 'etc', 'ld.so.conf')
+  ld_so_conf_d = os.path.join(sysroot, 'etc', 'ld.so.conf.d')
+
+  result = ''
+  if os.path.isfile(ld_so_conf):
+    result += process_ld_so_conf(ld_so_conf)
+  elif os.path.isdir(ld_so_conf_d):
+    for file in os.listdir(ld_so_conf_d):
+      if file.endswith('.conf'):
+        result += process_ld_so_conf(os.path.join(ld_so_conf_d, file))
+
+  print '"' + result.strip() + '"'
+  return 0
+
+
+if __name__ == '__main__':
+  sys.exit(main())
+

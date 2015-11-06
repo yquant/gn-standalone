@@ -311,6 +311,11 @@ template("gcc_toolchain") {
             "${invoker.strip} --strip-unneeded -o $sofile $unstripped_sofile"
         command += " && " + strip_command
       }
+
+      # Use this to make "&&" working on windows
+      link_wrapper = rebase_path("//build/toolchain/gcc_link_wrapper.py")
+      command = "$python_path $link_wrapper -- $command"
+
       rspfile_content = "-Wl,--whole-archive {{inputs}} {{solibs}} -Wl,--no-whole-archive $solink_libs_section_prefix {{libs}} $solink_libs_section_postfix"
 
       description = "SOLINK_MODULE $sofile"
@@ -354,6 +359,11 @@ template("gcc_toolchain") {
       if (defined(invoker.postlink)) {
         command += " && " + invoker.postlink
       }
+
+      # Use this to make "&&" working on windows
+      link_wrapper = rebase_path("//build/toolchain/gcc_link_wrapper.py")
+      command = "$python_path $link_wrapper -- $command"
+
       description = "LINK $outfile"
       rspfile_content = "{{inputs}}"
       outputs = [

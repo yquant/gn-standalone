@@ -18,9 +18,6 @@ sys.path.insert(0, os.path.join(chrome_src, 'tools', 'gyp', 'pylib'))
 json_data_file = os.path.join(script_dir, 'win_toolchain.json')
 
 
-import gyp
-
-
 def SetEnvironmentAndGetRuntimeDllDirs():
   """Sets up os.environ to use the depot_tools VS toolchain with gyp, and
   returns the location of the VS runtime DLLs so they can be copied into
@@ -33,6 +30,7 @@ def SetEnvironmentAndGetRuntimeDllDirs():
   # been downloaded before (in which case json_data_file will exist).
   if ((sys.platform in ('win32', 'cygwin') or os.path.exists(json_data_file))
       and depot_tools_win_toolchain):
+    import gyp
     if not os.path.exists(json_data_file):
       Update()
     with open(json_data_file, 'r') as tempf:

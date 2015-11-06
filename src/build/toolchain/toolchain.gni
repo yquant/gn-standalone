@@ -48,9 +48,11 @@ if (is_posix) {
 stamp_description = "STAMP {{output}}"
 copy_description = "COPY {{source}} {{output}}"
 if (host_os == "win") {
-  stamp_command = "$python_path gyp-win-tool stamp {{output}}"
+  gyp_win_tool_path =
+      rebase_path("//tools/gyp/pylib/gyp/win_tool.py", root_build_dir)
+  stamp_command = "$python_path $gyp_win_tool_path stamp {{output}}"
   copy_command =
-      "$python_path gyp-win-tool recursive-mirror {{source}} {{output}}"
+      "$python_path $gyp_win_tool_path recursive-mirror {{source}} {{output}}"
 } else {
   stamp_command = "touch {{output}}"
   copy_command = "ln -f {{source}} {{output}} 2>/dev/null || (rm -rf {{output}} && cp -af {{source}} {{output}})"
