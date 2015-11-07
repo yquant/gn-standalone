@@ -7,6 +7,6 @@ group("apps") {
 group("tests") {
   testonly = true
   deps = [
-#    "//projects/example_app/src:example_app_unittests",
+    "//projects/example_app/src:example_app_unittests",
   ]
 }

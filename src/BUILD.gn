@@ -32,6 +32,6 @@ group("root") {
 group("tests") {
   testonly = true
   deps = [
-#    "//projects:tests",
+    "//projects:tests",
   ]
 }

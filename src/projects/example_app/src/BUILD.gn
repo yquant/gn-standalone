@@ -2,6 +2,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+import("//testing/test.gni")
+
 static_library("example_lib") {
   sources = [
     "example_lib.cc",
@@ -32,5 +34,22 @@ executable("example_app") {
   deps = [
     ":example_lib",
     ":example_shlib"
+  ]
+}
+
+test("example_app_unittests") {
+  sources = [
+    "tests/static_lib_add_unittest.cc",
+    "tests/shared_lib_add_unittest.cc",
+    "tests/run_all_unittests.cc",
+  ]
+
+  include_dirs = ["//projects/example_app/src/include"]
+  
+  deps = [
+    ":example_lib",
+    ":example_shlib",
+    "//base/test:test_support",
+    "//testing/gtest",
   ]
 }

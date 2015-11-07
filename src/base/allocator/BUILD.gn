@@ -22,7 +22,7 @@ group("allocator") {
   }
 
   # This condition expresses the win_use_allocator_shim in the GYP build.
-  if (is_win && !is_component_build) {
+  if (is_win && !is_component_build && use_allocator != "none") {
     public_deps += [ ":allocator_shim" ]
   }
 }
@@ -50,7 +50,7 @@ config("tcmalloc_flags") {
 }
 
 # This config and libc modification are only used on Windows.
-if (is_win) {
+if (is_win && use_allocator != "none") {
   import("//build/config/win/visual_studio_version.gni")
 
   config("nocmt") {

@@ -673,6 +673,13 @@ config("default_warnings") {
       "/wd4610",  # Class can never be instantiated, constructor required.
       "/wd4995",  # 'X': name was marked as #pragma deprecated
       "/wd4996",  # Deprecated function warning.
+      
+      "/wd4311",
+      "/wd4312",
+      "/wd4456",
+      "/wd4457",
+      "/wd4458",
+      "/wd4819",
     ]
 
     # VS xtree header file needs to be patched or 4702 (unreachable code
