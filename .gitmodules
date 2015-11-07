@@ -1,0 +1,3 @@
+[submodule "src/third_party/icu"]
+	path = src/third_party/icu
+	url = https://github.com/yquant/icu.git
