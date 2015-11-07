@@ -15,6 +15,7 @@ group("root") {
   # completed or possibly just tested and then re-enabled.
   deps = [
     "//projects:apps",
+    "//tools/gn:gn",
   ]
 
   if (is_linux) {

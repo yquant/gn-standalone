@@ -1,0 +1,9 @@
+tasks = [
+  {
+    # Update LASTCHANGE.
+    'name': 'lastchange',
+    'pattern': '.',
+    'action': ['python', '../src/build/util/lastchange.py',
+               '-o', '../src/build/util/LASTCHANGE'],
+  },
+]
