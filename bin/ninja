@@ -1,0 +1,14 @@
+#!/bin/sh
+
+DIR=`dirname "$0"`
+
+OS=`uname`
+if [ "$OS" = "Linux" ]; then
+  OS="linux64"
+else
+  OS="mac"
+fi
+
+NINJA="${DIR}/${OS}/ninja"
+
+$NINJA $*
