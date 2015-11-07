@@ -1,3 +1,9 @@
 [submodule "src/third_party/icu"]
 	path = src/third_party/icu
 	url = https://github.com/yquant/icu.git
+[submodule "src/testing/gmock"]
+	path = src/testing/gmock
+	url = https://github.com/yquant/gmock.git
+[submodule "src/testing/gtest"]
+	path = src/testing/gtest
+	url = https://github.com/yquant/gtest.git
