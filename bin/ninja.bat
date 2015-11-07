@@ -7,11 +7,4 @@ setlocal
 :: This is required with cygwin only.
 PATH=%~dp0;%PATH%
 
-set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-
-set GN_STANDALONE=%~dp0\win\gn_standalone.exe
-set GN=%~dp0\..\src\buildtools\win\gn.exe
-
-if exist %GN_STANDALONE% set GN=%GN_STANDALONE%
-
-%GN% %*
+%~dp0\win\ninja.exe %*

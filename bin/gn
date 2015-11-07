@@ -3,4 +3,19 @@
 export DEPOT_TOOLS_WIN_TOOLCHAIN=0
 
 DIR=`dirname "$0"`
-${DIR}/../src/buildtools/linux64/gn $*
+
+OS=`uname`
+if [ "$OS" = "Linux" ]; then
+  OS="linux64"
+else
+  OS="mac"
+fi
+
+GN="${DIR}/../src/buildtools/${OS}/gn"
+GN_STANDALONE="${DIR}/${OS}/gn_standalone"
+
+if [ -f "$GN_STANDALONE" ]; then
+  GN=$GN_STANDALONE
+fi
+
+$GN $*
