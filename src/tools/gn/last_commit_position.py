@@ -51,7 +51,7 @@ def RunGitCommand(directory, command):
 
 
 def FetchCommitPosition(directory):
-  regex = re.compile(r'\s*Cr-Commit-Position: refs/heads/master@\{#(\d+)\}\s*')
+  regex = re.compile(r'commit\s*([0-9, a-f, A-F]+)\s*')
 
   # Search this far backward in the git log. The commit position should be
   # close to the top. We allow some slop for long commit messages, and maybe
@@ -59,7 +59,7 @@ def FetchCommitPosition(directory):
   # max prevents us from searching all history in the case of an error.
   max_lines = 2048
 
-  proc = RunGitCommand(directory, ['log'])
+  proc = RunGitCommand(directory, ['log', '-1'])
   for i in range(max_lines):
     line = proc.stdout.readline()
     if not line:
@@ -67,7 +67,7 @@ def FetchCommitPosition(directory):
 
     match = regex.match(line)
     if match:
-      return match.group(1)
+      return match.group(1)[0:6]
 
   return None
 
