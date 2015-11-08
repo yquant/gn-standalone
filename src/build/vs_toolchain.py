@@ -30,7 +30,6 @@ def SetEnvironmentAndGetRuntimeDllDirs():
   # been downloaded before (in which case json_data_file will exist).
   if ((sys.platform in ('win32', 'cygwin') or os.path.exists(json_data_file))
       and depot_tools_win_toolchain):
-    import gyp
     if not os.path.exists(json_data_file):
       Update()
     with open(json_data_file, 'r') as tempf:
@@ -47,16 +46,19 @@ def SetEnvironmentAndGetRuntimeDllDirs():
     # below). http://crbug.com/345992
     vs2013_runtime_dll_dirs = toolchain_data['runtime_dirs']
 
-    os.environ['GYP_MSVS_OVERRIDE_PATH'] = toolchain
-    os.environ['GYP_MSVS_VERSION'] = version
-    # We need to make sure windows_sdk_path is set to the automated
-    # toolchain values in GYP_DEFINES, but don't want to override any
-    # otheroptions.express
-    # values there.
-    gyp_defines_dict = gyp.NameValueListToDict(gyp.ShlexEnv('GYP_DEFINES'))
-    gyp_defines_dict['windows_sdk_path'] = win_sdk
-    os.environ['GYP_DEFINES'] = ' '.join('%s=%s' % (k, pipes.quote(str(v)))
-        for k, v in gyp_defines_dict.iteritems())
+    # We may set DEPOT_TOOLS_WIN_TOOLCHAIN = 2 in gn-standalone build
+    if os.environ.get('DEPOT_TOOLS_WIN_TOOLCHAIN') != '2':
+      os.environ['GYP_MSVS_OVERRIDE_PATH'] = toolchain
+      os.environ['GYP_MSVS_VERSION'] = version
+      # We need to make sure windows_sdk_path is set to the automated
+      # toolchain values in GYP_DEFINES, but don't want to override any
+      # otheroptions.express
+      # values there.
+      import gyp
+      gyp_defines_dict = gyp.NameValueListToDict(gyp.ShlexEnv('GYP_DEFINES'))
+      gyp_defines_dict['windows_sdk_path'] = win_sdk
+      os.environ['GYP_DEFINES'] = ' '.join('%s=%s' % (k, pipes.quote(str(v)))
+          for k, v in gyp_defines_dict.iteritems())
     os.environ['WINDOWSSDKDIR'] = win_sdk
     os.environ['WDK_DIR'] = wdk
     # Include the VS runtime in the PATH in case it's not machine-installed.

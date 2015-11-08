@@ -1,0 +1,50 @@
+tasks = [
+  {
+    # Pull clang_format script.
+    'name': 'clang_format_script',
+    'pattern': '.',
+    'action': [
+      'git',
+      'clone',
+      'https://chromium.googlesource.com/chromium/llvm-project/cfe/tools/clang-format.git',
+      '../src/buildtools/clang_format/script',
+      '--depth=1'
+    ],
+  },
+  # Pull clang-format binaries using checked-in hashes.
+  {
+    'name': 'clang_format_win',
+    'pattern': '.',
+    'action': [ 'download_from_google_storage',
+                '--no_resume',
+                '--platform=win32',
+                '--no_auth',
+                '--bucket', 'chromium-clang-format',
+                '-s', '../src/buildtools/win/clang-format.exe.sha1',
+    ],
+  },
+  {
+    'name': 'clang_format_mac',
+    'pattern': '.',
+    'action': [ 'python',
+                'download_from_google_storage',
+                '--no_resume',
+                '--platform=darwin',
+                '--no_auth',
+                '--bucket', 'chromium-clang-format',
+                '-s', '../src/buildtools/mac/clang-format.sha1',
+    ],
+  },
+  {
+    'name': 'clang_format_linux',
+    'pattern': '.',
+    'action': [ 'python',
+                'download_from_google_storage',
+                '--no_resume',
+                '--platform=linux*',
+                '--no_auth',
+                '--bucket', 'chromium-clang-format',
+                '-s', '../src/buildtools/linux64/clang-format.sha1',
+    ],
+  }
+]

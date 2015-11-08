@@ -16,5 +16,7 @@ if not exist "%TaskFile%" (
   goto :EOF
 )
 
-:: Defer control.
-python "%~dp0\download.py" runtasks --tasksfile %TaskFile%
+if "%1" == "win_toolchain" set DEPOT_TOOLS_WIN_TOOLCHAIN=2
+
+set PYTHONDONTWRITEBYTECODE=1
+python "%~dp0\gclient.py" runtasks --tasksfile %TaskFile%

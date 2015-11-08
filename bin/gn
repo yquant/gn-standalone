@@ -1,6 +1,8 @@
 #!/bin/sh
 
-export DEPOT_TOOLS_WIN_TOOLCHAIN=0
+if [ "$DEPOT_TOOLS_WIN_TOOLCHAIN" = "" ]; then
+  export DEPOT_TOOLS_WIN_TOOLCHAIN=0
+fi
 
 DIR=`dirname "$0"`
 

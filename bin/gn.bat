@@ -7,7 +7,7 @@ setlocal
 :: This is required with cygwin only.
 PATH=%~dp0;%PATH%
 
-set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+if "%DEPOT_TOOLS_WIN_TOOLCHAIN%" == "" set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 
 set GN_STANDALONE=%~dp0\win\gn_standalone.exe
 set GN=%~dp0\..\src\buildtools\win\gn.exe
