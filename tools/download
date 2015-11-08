@@ -14,4 +14,8 @@ if [ ! -f "$TASK_FILE" ]; then
   exit 1
 fi
 
-PYTHONDONTWRITEBYTECODE=1 exec python "$base_dir/download.py" "runtasks" "--tasksfile" "$TASK_FILE"
+if [ "$1" = "win_toolchain" ]; then
+  export DEPOT_TOOLS_WIN_TOOLCHAIN=2
+fi
+
+PYTHONDONTWRITEBYTECODE=1 exec python "$base_dir/gclient.py" "runtasks" "--tasksfile" "$TASK_FILE"
