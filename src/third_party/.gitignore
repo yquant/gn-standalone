@@ -1,0 +1,8 @@
+android_tools
+llvm
+llvm-build
+
+android_tools/
+llvm/
+llvm-build/
+
