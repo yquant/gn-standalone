@@ -1,0 +1,8 @@
+tasks = [
+  {
+    # Update the Windows toolchain if necessary.
+    'name': 'win_toolchain',
+    'pattern': '.',
+    'action': ['python', '../src/build/vs_toolchain.py', 'update'],
+  }
+]

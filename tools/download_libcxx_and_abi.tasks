@@ -1,0 +1,39 @@
+tasks = [
+  {
+    # Pull libcxx.
+    'name': 'libcxx',
+    'pattern': '.',
+    'action': [
+      'git',
+      'clone',
+      'https://chromium.googlesource.com/chromium/llvm-project/libcxx.git',
+      '../src/buildtools/third_party/libc++/trunk',
+      '--depth=1'
+    ],
+  },
+  {
+    # Pull libcxxabi.
+    'name': 'libcxxabi',
+    'pattern': '.',
+    'action': [
+      'git',
+      'clone',
+      'https://chromium.googlesource.com/chromium/llvm-project/libcxxabi.git',
+      '../src/buildtools/third_party/libc++abi/trunk',
+      '--depth=1'
+    ],
+  },
+  # Pull the prebuilt libc++ static library for mac.
+  {
+    'name': 'libcpp_mac',
+    'pattern': '.',
+    'action': [ 'python',
+                'download_from_google_storage',
+                '--no_resume',
+                '--platform=darwin',
+                '--no_auth',
+                '--bucket', 'chromium-libcpp',
+                '-s', '../src/third_party/libc++-static/libc++.a.sha1',
+    ],
+  }
+]
