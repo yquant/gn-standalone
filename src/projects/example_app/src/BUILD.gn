@@ -20,6 +20,8 @@ shared_library("example_shlib") {
   ]
   
   include_dirs = ["//projects/example_app/src/include"]
+
+  deps = [ "//build/config/sanitizers:deps" ]
 }
 
 executable("example_app") {
@@ -31,6 +33,7 @@ executable("example_app") {
   
   deps = [
     ":example_lib",
-    ":example_shlib"
+    ":example_shlib",
+    "//build/config/sanitizers:deps"
   ]
 }

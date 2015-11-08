@@ -27,7 +27,8 @@ tasks = [
   {
     'name': 'libcpp_mac',
     'pattern': '.',
-    'action': [ 'download_from_google_storage',
+    'action': [ 'python',
+                'download_from_google_storage',
                 '--no_resume',
                 '--platform=darwin',
                 '--no_auth',
