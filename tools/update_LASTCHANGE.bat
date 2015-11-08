@@ -7,5 +7,5 @@ setlocal
 :: This is required with cygwin only.
 PATH=%~dp0;%PATH%
 
-:: Defer control.
-python "%~dp0\download.py" runtasks --tasksfile=lastchange.tasks
+set PYTHONDONTWRITEBYTECODE=1
+python "%~dp0\gclient.py" runtasks --tasksfile=lastchange.tasks

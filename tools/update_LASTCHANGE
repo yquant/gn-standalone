@@ -5,4 +5,4 @@
 
 base_dir=$(dirname "$0")
 
-PYTHONDONTWRITEBYTECODE=1 exec python "$base_dir/download.py" "runtasks" "--tasksfile=lastchange.tasks"
+PYTHONDONTWRITEBYTECODE=1 exec python "$base_dir/gclient.py" "runtasks" "--tasksfile=lastchange.tasks"
