@@ -6,11 +6,11 @@ declare_args() {
   # Path to Visual Studio. If empty, the default is used which is to use the
   # automatic toolchain in depot_tools. If set, you must also set the
   # visual_studio_version and wdk_path.
-  visual_studio_path = ""
+  visual_studio_path = "C:\Program Files (x86)\Microsoft Visual Studio 14.0"
 
   # Version of Visual Studio pointed to by the visual_studio_path.
   # Use "2013" for Visual Studio 2013, or "2013e" for the Express version.
-  visual_studio_version = ""
+  visual_studio_version = 2015
 
   # Directory of the Windows driver kit. If visual_studio_path is empty, this
   # will be auto-filled.
