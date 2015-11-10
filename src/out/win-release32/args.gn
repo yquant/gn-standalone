@@ -1,5 +1,5 @@
 is_standalone_build = true
 visual_studio_path = "C:\Program Files (x86)\Microsoft Visual Studio 14.0"
-visual_studio_version = "2015"
+visual_studio_version = 2015
 target_cpu = "x86"
 is_debug = false
