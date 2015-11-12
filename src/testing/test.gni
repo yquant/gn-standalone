@@ -9,7 +9,7 @@
 # Define a test as an executable (or apk on Android) with the "testonly" flag
 # set.
 template("test") {
-  if (is_android) {
+  if (is_android && !is_standalone_build) {
     import("//build/config/android/config.gni")
     import("//build/config/android/rules.gni")
 

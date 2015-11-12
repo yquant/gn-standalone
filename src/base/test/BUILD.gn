@@ -4,7 +4,7 @@
 
 import("//build/config/ui.gni")
 
-if (is_android) {
+if (is_android && !is_standalone_build) {
   import("//build/config/android/rules.gni")
 }
 
@@ -167,7 +167,7 @@ source_set("test_support") {
     set_sources_assignment_filter(sources_assignment_filter)
   }
 
-  if (is_android) {
+  if (is_android && !is_standalone_build) {
     deps += [ ":base_unittests_jni_headers" ]
   }
 }
@@ -213,7 +213,7 @@ if (is_linux) {
   }
 }
 
-if (is_android) {
+if (is_android && !is_standalone_build) {
   generate_jni("base_unittests_jni_headers") {
     sources = [
       "android/java/src/org/chromium/base/ContentUriTestUtils.java",

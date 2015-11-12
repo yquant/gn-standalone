@@ -1,5 +1,6 @@
 is_standalone_build = true
 target_os = "android"
 target_cpu = "arm"
+android_api_level = 21
 is_clang = false
 is_debug = false
